@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaludarController;
+use App\Models\Producto;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,10 @@ use App\Http\Controllers\SaludarController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/producto', [ProductoController::class, 'index']);
+// Route::post('/producto', [ProductoController::class, 'store']);
+// Route::put('/producto/{id}', [ProductoController::class, 'update']);
+// Route::delete('/producto/{id}', [ProductoController::class, 'destroy']);
+
+Route::resource('/producto', ProductoController::class)->only(['index', 'store', 'update', 'destroy']);
