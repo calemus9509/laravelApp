@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="../js/axios.min.js"></script>
+        <title>Productinho</title>
+    </head>
+    <body>
+        <h1 style="text-align: center">Productos</h1>
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="txtNombre" id="txtNombre" />
+        </div>
+        <div>
+            <label for="nombre">Cantidad:</label>
+            <input type="number" name="txtCantidad" id="txtCantidad" />
+        </div>
+        <div>
+            <label for="nombre">Precio:</label>
+            <input type="text" name="txtPrecio" id="txtPrecio" />
+        </div>
+        <div>
+            <button id="btnRegistrar" onclick="registrar()">Registrar</button>
+            <button id="btnModificar" onclick="update()">Modificar</button>
+            <button id="btnEliminar" onclick="deletes()">Eliminar</button>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </body>
+</html>
+
+<script src="../js/productos.js"></script>

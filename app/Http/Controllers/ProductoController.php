@@ -13,6 +13,7 @@ class ProductoController extends Controller
     public function index()
     {
         //read
+        return producto::all();
     }
 
 
@@ -23,6 +24,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //create
+        Producto::create($request->all());
     }
 
 
@@ -35,6 +37,7 @@ class ProductoController extends Controller
     public function update(Request $request, Producto $producto)
     {
         //
+        Producto::findOrFail($request->id)->update($request->all());
     }
 
     /**
@@ -43,5 +46,6 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         //
+        Producto::findOrFail($producto->id)->delete();
     }
 }
