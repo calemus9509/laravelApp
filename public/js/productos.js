@@ -13,7 +13,12 @@ function registrar() {
             clear();
         })
         .catch(function (error) {
-            console.log(error);
+            console.log(error.response.data.errors);
+            let errors = "";
+            Object.values(error.response.data.errors).forEach((element) => {
+                errors += `${element} <br>`;
+            });
+            errorMessage.innerHTML = `Error <br>${errors}`;
         });
 }
 
@@ -23,15 +28,25 @@ function read() {
         .then(function (response) {
             let datos = "";
             console.log(response.data);
-            response.data.forEach((element, index) => {
-                datos += `<tr onclick='loadData(${JSON.stringify(element)})'>`;
-                datos += `<td>${index + 1}</td>`;
-                datos += `<td>${element.nombre}</td>`;
-                datos += `<td>${element.cantidad}</td>`;
-                datos += `<td>${element.precio}</td>`;
-                datos += `</tr>`;
+            //paginacion
+            let lista = "";
+            response.data.links.forEach((element) => {
+                console.log(element);
+                lista += `<td>
+                <a href="${element.url}">${element.label}
+                </td>`;
             });
-            tableBody.innerHTML = datos;
+            list.innerHTML = lista;
+            // //trae todo los datos
+            // // // Object.values(response.data).forEach((element, index) => {
+            // // //     datos += `<tr onclick='loadData(${JSON.stringify(element)})'>`;
+            // // //     datos += `<td>${index + 1}</td>`;
+            // // //     datos += `<td>${element.nombre}</td>`;
+            // // //     datos += `<td>${element.cantidad}</td>`;
+            // // //     datos += `<td>${element.precio}</td>`;
+            // // //     datos += `</tr>`;
+            // // });
+            // tableBody.innerHTML = datos;
         })
         .catch(function (error) {
             console.log(error);

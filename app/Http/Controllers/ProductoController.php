@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductoRequest;
 
 class ProductoController extends Controller
 {
@@ -13,7 +14,9 @@ class ProductoController extends Controller
     public function index()
     {
         //read
-        return producto::all();
+        // trae todo
+        // return producto::all()->where('estado', 'A');
+        return producto::where('estado', 'A')->paginate(2);
     }
 
 
@@ -21,8 +24,15 @@ class ProductoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
+        // //validate
+        // Producto::create($request->validate([
+        //     'nombre' => 'required|max:45',
+        //     'cantidad' => 'required|numeric|min:2',
+        //     'precio' => 'required|min:3|'
+        // ]));
+
         //create
         Producto::create($request->all());
     }
@@ -46,6 +56,10 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         //
-        Producto::findOrFail($producto->id)->delete();
+        // Producto::findOrFail($producto->id)->delete(); elminar
+
+        $producto = Producto::findOrFail($producto->id);
+        $producto->estado = 'I';
+        $producto->save();
     }
 }
