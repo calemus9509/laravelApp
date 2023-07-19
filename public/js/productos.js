@@ -22,31 +22,54 @@ function registrar() {
         });
 }
 
-function read() {
+function read(url = "producto") {
     axios
-        .get("producto")
+        .get(url)
         .then(function (response) {
             let datos = "";
-            console.log(response.data);
-            //paginacion
             let lista = "";
+            console.log(response.data);
+            //trae todo los datos a la paginacion
+            response.data.data.forEach((element, index) => {
+                datos += `<tr onclick='loadData(${JSON.stringify(element)})'>`;
+                datos += `<td>${index + 1}</td>`;
+                datos += `<td>${element.nombre}</td>`;
+                datos += `<td>${element.cantidad}</td>`;
+                datos += `<td>${element.precio}</td>`;
+                datos += `</tr>`;
+            });
+            //paginacion
             response.data.links.forEach((element) => {
                 console.log(element);
                 lista += `<td>
-                <a href="${element.url}">${element.label}
+                <a class="pagina" onclick="read('${element.url}')">${element.label}</a>
                 </td>`;
             });
+
             list.innerHTML = lista;
-            // //trae todo los datos
-            // // // Object.values(response.data).forEach((element, index) => {
-            // // //     datos += `<tr onclick='loadData(${JSON.stringify(element)})'>`;
-            // // //     datos += `<td>${index + 1}</td>`;
-            // // //     datos += `<td>${element.nombre}</td>`;
-            // // //     datos += `<td>${element.cantidad}</td>`;
-            // // //     datos += `<td>${element.precio}</td>`;
-            // // //     datos += `</tr>`;
-            // // });
+            tableBody.innerHTML = datos;
+
+            //trae todo los datos sin la paginacion
+            //  Object.values(response.data).forEach((element, index) => {
+            //     datos += `<tr onclick='loadData(${JSON.stringify(element)})'>`;
+            //     datos += `<td>${index + 1}</td>`;
+            //     datos += `<td>${element.nombre}</td>`;
+            //     datos += `<td>${element.cantidad}</td>`;
+            //     datos += `<td>${element.precio}</td>`;
+            //     datos += `</tr>`;
+            // });
             // tableBody.innerHTML = datos;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+function linkPaginate(url) {
+    axios
+        .get(url)
+        .then(function (response) {
+            console.log(response);
         })
         .catch(function (error) {
             console.log(error);
