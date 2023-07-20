@@ -8,6 +8,10 @@ use App\Http\Requests\ProductoRequest;
 
 class ProductoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('acceso', ['only' => ['store', 'update', 'destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

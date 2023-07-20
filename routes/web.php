@@ -16,14 +16,15 @@ use App\Models\Producto;
 |
 */
 
-Route::get('/', function () {
+Route::get('/star', function () {
     return view('welcome');
-});
+})->middleware('acceso');
 
 // Route::get('/producto', [ProductoController::class, 'index']);
 // Route::post('/producto', [ProductoController::class, 'store']);
 // Route::put('/producto/{id}', [ProductoController::class, 'update']);
 // Route::delete('/producto/{id}', [ProductoController::class, 'destroy']);
+
 
 Route::resource('/producto', ProductoController::class)->only(['index', 'store', 'update', 'destroy']);
 
