@@ -31,13 +31,15 @@ class ProductoController extends Controller
     public function store(ProductoRequest $request)
     {
         // //validate
+
         // Producto::create($request->validate([
         //     'nombre' => 'required|max:45',
         //     'cantidad' => 'required|numeric|min:2',
+
         //     'precio' => 'required|min:3|'
         // ]));
 
-        //create
+        // //create
         Producto::create($request->all());
     }
 

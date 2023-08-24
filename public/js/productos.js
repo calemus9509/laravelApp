@@ -18,7 +18,7 @@ function registrar() {
             Object.values(error.response.data.errors).forEach((element) => {
                 errors += `${element} <br>`;
             });
-            errorMessage.innerHTML = `Error <br>${errors}`;
+            errorMessage.innerHTML = `Errores <br>${errors}`;
         });
 }
 
